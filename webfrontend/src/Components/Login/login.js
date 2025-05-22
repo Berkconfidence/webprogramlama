@@ -1,8 +1,9 @@
 import React from "react";
 import './login.css';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-
+    const navigate = useNavigate();
 
     const handleUser = async (event) => {
         event.preventDefault();
@@ -10,7 +11,6 @@ function Login() {
         const password = event.target.password.value;
 
         try {
-            console.log("Login isteği gönderiliyor:", username); // log eklendi
             const response = await fetch('/user/login', {
                 method: 'POST',
                 headers: {
@@ -21,10 +21,11 @@ function Login() {
                     password: password
                 }),
             });
-            console.log("Backend'den cevap geldi:", response); // log eklendi
             
             if (response.ok) {
-                window.location.href = "/home";
+                const user = await response.json();
+                localStorage.setItem("userId", user.userId);
+                navigate("/home");
             } else {
                 alert("Bilgiler Hatalı. Lütfen tekrar deneyin.");
             }

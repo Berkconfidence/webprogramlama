@@ -1,0 +1,30 @@
+.space {
+    padding-top: 100px;
+}
+.home-tablist {
+    padding: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: #f4f4f5;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.home-tablist-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-inquiry-tab {
+    flex: 1;
+    padding: 6px;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+    color: #71717a;
+}
+
+.home-inquiry-tab.active {
+    background-color: #ffffff;
+    color: black;
+}

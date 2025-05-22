@@ -1,0 +1,138 @@
+.createpost-card {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    border: 1px solid #e4e4e7;
+    border-radius: 5px;
+    min-height: auto;
+    min-width: auto;
+    padding: 0px 30px;
+}
+
+.createpost-card h1 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.createpost-card-subtitle {
+    font-size: 14px;
+    color: #71717a;
+    margin-top: -15px;
+}
+
+.createpost-card-photolabel {
+    font-size: 15px;
+    margin-top: 30px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.createpost-file-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 30px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    min-height: 270px;
+    max-height: 270px; 
+    box-sizing: border-box;
+}
+
+.createpost-file-button:hover {
+    border-color: #4a90e2;
+    background-color: #f0f7ff;
+}
+
+.createpost-file-button img {
+    margin-top: 50px;
+    width: 40px;
+    height: 40px;
+}
+
+.createpost-file-button span {
+    font-size: 14px;
+    color: #71717a;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.createpost-buttonmiddle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.createpost-file-button2 {
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.createpost-file-button2:hover {
+    background-color: #f0f7ff;
+}
+
+.createpost-card-starlabel {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.createpost-card-star {
+    display: flex;
+}
+
+.createpost-card-starrating {
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.createpost-card-reviewlabel {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: -5px;
+}
+
+.createpost-textarea {
+    width: 100%;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 72px;
+}
+
+.createpost-file-button3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    transition: all 0.3s ease;
+    margin-bottom: 50px;
+    font-size: 15px;
+}
+
+.createpost-file-button3:hover {
+    background-color: #2f2f31;
+    color: #fff;
+}

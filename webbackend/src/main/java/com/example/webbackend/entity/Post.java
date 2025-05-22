@@ -1,5 +1,6 @@
 package com.example.webbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,15 +18,16 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @Lob
-    @Column(nullable = false)
+    @Column(name = "image", columnDefinition = "LONGBLOB", nullable = false)
     private byte[] image;
 
     private Double rating;
 
-    private String caption;
+    private String review;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
