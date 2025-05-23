@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -16,6 +17,15 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+
+    public List<Post> getAllUserPosts(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı");
+        }
+        User user = userOpt.get();
+        return postRepository.findAllByUser(user);
+    }
 
     public Post createPost(Long userId, MultipartFile image, Double rating, String review) {
 
@@ -48,4 +58,5 @@ public class PostService {
 
         return postRepository.save(post);
     }
+
 }

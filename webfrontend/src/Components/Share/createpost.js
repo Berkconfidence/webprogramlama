@@ -83,7 +83,7 @@ function CreatePost() {
                 {!selectedFile && (
                     <button type="button" className="createpost-file-button" onClick={onChooseFile}>
                         <img src={addPostIcon} alt="back"/>
-                        <span>Fotoğraf yüklemek için tıklayın veya sürükleyin</span>
+                        <span>Fotoğraf yüklemek için tıklayın</span>
                     </button>
                 )}
 
