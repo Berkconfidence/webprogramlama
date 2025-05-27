@@ -3,11 +3,9 @@ package com.example.webbackend.service;
 import com.example.webbackend.entity.User;
 import com.example.webbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -16,7 +14,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User getUserById(Long userId) {
+    public User getUserById(Integer userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
@@ -43,7 +41,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateInfo(Long userId, MultipartFile image, String username, String bio) {
+    public User updateInfo(Integer userId, MultipartFile image, String username, String bio) {
         if(username == null || userId == null)
             throw new IllegalArgumentException("Bilgiler eksik");
 

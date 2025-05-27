@@ -2,7 +2,8 @@ import React from "react";
 import './home.css';
 import Navbar from "../Navbar/navbar";
 //import CreatePost from "../Share/createpost";
-import Profile from "../Profile/profile";
+//import Profile from "../Profile/profile";
+import Explore from "../Explore/explore";
 
 function Home() {
 
@@ -44,7 +45,7 @@ function Home() {
                 </div>
             </div>
 
-            <Profile />
+            <Explore />
         </div>
     );
 }

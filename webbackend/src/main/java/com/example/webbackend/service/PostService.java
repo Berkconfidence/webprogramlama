@@ -18,7 +18,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public List<Post> getAllUserPosts(Long userId) {
+    public List<Post> getAllUserPosts(Integer userId) {
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isEmpty()) {
             throw new IllegalArgumentException("Kullanıcı bulunamadı");
@@ -27,7 +27,11 @@ public class PostService {
         return postRepository.findAllByUser(user);
     }
 
-    public Post createPost(Long userId, MultipartFile image, Double rating, String review) {
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+
+    public Post createPost(Integer userId, MultipartFile image, Double rating, String review) {
 
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isEmpty()) {

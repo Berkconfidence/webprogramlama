@@ -1,7 +1,6 @@
 package com.example.webbackend.controller;
 
 import com.example.webbackend.dto.UserDto;
-import com.example.webbackend.entity.Post;
 import com.example.webbackend.entity.User;
 import com.example.webbackend.service.UserService;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<?> getUserById(@PathVariable Integer userId) {
         User user = userService.getUserById(userId);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -53,8 +52,8 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> createPost(
-            @RequestParam("userId") Long userId,
+    public ResponseEntity<?> updateUser(
+            @RequestParam("userId") Integer userId,
             @RequestParam(value = "profilePicture", required = false) MultipartFile image,
             @RequestParam("username") String username,
             @RequestParam("bio") String bio
