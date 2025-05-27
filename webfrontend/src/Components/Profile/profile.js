@@ -2,6 +2,7 @@ import React from "react";
 import './profile.css';
 import Post from "./post";
 import Like from "./like";
+import DefaultProfile from '../../assets/profile.png';
 
 function Profile() {
     const userId = localStorage.getItem("userId");
@@ -99,7 +100,7 @@ function Profile() {
                                 ? userData.profilePhoto.startsWith("http")
                                     ? userData.profilePhoto
                                     : `data:image/jpeg;base64,${userData.profilePhoto}`
-                                : "/default-profile.png"
+                                : DefaultProfile
                         }
                         alt="Profil Resmi" style={{ width: "110px", height: "110px", borderRadius: "50%", marginTop: "18px" }}
                     />

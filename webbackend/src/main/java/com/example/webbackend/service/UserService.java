@@ -36,6 +36,10 @@ public class UserService {
         return user;
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User createUser(String username, String email, String password) {
 
         if(username == null || email == null || password == null)
@@ -68,6 +72,32 @@ public class UserService {
             throw new RuntimeException("Fotoğraf kaydedilemedi", e);
         }
 
+        return userRepository.save(user);
+    }
+
+    public User updateEmail(Integer userId, String newEmail) {
+        if (userId == null || newEmail == null || newEmail.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı ID veya yeni e-posta eksik.");
+        }
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı.");
+        }
+        User user = userOpt.get();
+        user.setEmail(newEmail);
+        return userRepository.save(user);
+    }
+
+    public User updatePassword(Integer userId, String newPassword) {
+        if (userId == null || newPassword == null || newPassword.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı ID veya yeni şifre eksik.");
+        }
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı.");
+        }
+        User user = userOpt.get();
+        user.setPasswordHash(newPassword);
         return userRepository.save(user);
     }
 }

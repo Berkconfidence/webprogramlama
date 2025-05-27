@@ -31,7 +31,6 @@ function Login() {
             }
         } catch (error) {
             alert("Bağlantı hatası: " + error.message);
-            console.error("Fetch hatası:", error); // log eklendi
         }
     }
 

@@ -3,6 +3,7 @@ import '../Profile/post.css';
 import '../Explore/explore.css';
 import { StarRating } from "../Share/starrating.tsx";
 
+
 function SearchProfilePost({user}) {
     const [posts, setPosts] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);

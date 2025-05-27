@@ -1,7 +1,7 @@
 import React from "react";
 import '../Profile/profile.css';
-import './searchprofile.css';
 import SearchProfilePost from "./searchprofilepost";
+import DefaultProfile from '../../assets/profile.png';
 
 function SearchProfile({ user, onBack }) {
     if (!user) return null;
@@ -15,7 +15,7 @@ function SearchProfile({ user, onBack }) {
                                 ? user.profilePhoto.startsWith("http")
                                     ? user.profilePhoto
                                     : `data:image/jpeg;base64,${user.profilePhoto}`
-                                : "/default-profile.png"
+                                : DefaultProfile
                         }
                         alt="Profil Resmi" style={{ width: "110px", height: "110px", borderRadius: "50%", marginTop: "18px" }}
                     />

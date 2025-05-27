@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
@@ -74,6 +76,33 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
+        }
+    }
+
+    @PutMapping("/update/email")
+    public ResponseEntity<?> updateEmail(@RequestParam("userId") Integer userId,
+                                         @RequestParam("newEmail") String newEmail) {
+        System.out.println("metot deneme");
+        try {
+            User updatedUser = userService.updateEmail(userId, newEmail);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("E-posta güncellenirken hata oluştu.");
+        }
+    }
+
+    @PutMapping("/update/password")
+    public ResponseEntity<?> updatePassword(@RequestParam("userId") Integer userId,
+                                            @RequestParam("newPassword") String newPassword) {
+        try {
+            User updatedUser = userService.updatePassword(userId, newPassword);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("E-posta güncellenirken hata oluştu.");
         }
     }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import './search.css';
 import SearchProfile from "./searchprofile";
+import DefaultProfile from '../../assets/profile.png';
 
 function Search() {
     const [searchQuery, setSearchQuery] = React.useState("");
@@ -63,7 +64,7 @@ function Search() {
                                                 ? user.profilePhoto.startsWith("http")
                                                     ? user.profilePhoto
                                                     : `data:image/jpeg;base64,${user.profilePhoto}`
-                                                : "/default-profile.png"
+                                                : DefaultProfile
                                         }
                                         alt="Profil"
                                         className="search-user-avatar"
