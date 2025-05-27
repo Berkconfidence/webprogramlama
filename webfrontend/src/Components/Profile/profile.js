@@ -1,6 +1,7 @@
 import React from "react";
 import './profile.css';
 import Post from "./post";
+import Like from "./like";
 
 function Profile() {
     const userId = localStorage.getItem("userId");
@@ -107,13 +108,13 @@ function Profile() {
                         <p className="profile-bio">{userData.bio}</p>
                         <div className="profile-posts">
                             <div className="profile-info-count">
-                                <strong>15</strong> Gönderi
+                                <strong>{userData.posts.length}</strong> Gönderi
                             </div>
                             <div className="profile-info-count">
-                                <strong>76</strong> Yorum
+                                <strong>{userData.comments.length}</strong> Yorum
                             </div>
                             <div className="profile-info-count">
-                                <strong>185</strong> Beğeni
+                                <strong>{userData.likes.length}</strong> Beğeni
                             </div>
                         </div>
                     </div>
@@ -188,7 +189,8 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            <Post />
+            {activeTab === 'gonderiler' && <Post />}
+            {activeTab === 'begenilenler' && <Like />}
         </div>
         
         

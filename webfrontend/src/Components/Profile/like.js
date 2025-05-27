@@ -3,7 +3,7 @@ import './post.css';
 import '../Explore/explore.css';
 import { StarRating } from "../Share/starrating.tsx";
 
-function Post() {
+function Like() {
     const [posts, setPosts] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [selectedPost, setSelectedPost] = React.useState(null);
@@ -18,7 +18,7 @@ function Post() {
     React.useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch(`/post/${userId}`);
+                const response = await fetch(`/post/liked/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setPosts(data);
@@ -262,4 +262,4 @@ function Post() {
         </div>
     );
 }
-export default Post;
+export default Like;

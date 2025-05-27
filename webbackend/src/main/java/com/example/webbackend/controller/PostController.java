@@ -23,6 +23,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("/liked/{userId}")
+    public ResponseEntity<?> getAllUserLikedPosts(@PathVariable Integer userId) {
+        List<Post> posts = postService.getAllUserLikedPosts(userId);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         List<Post> posts = postService.getAllPosts();

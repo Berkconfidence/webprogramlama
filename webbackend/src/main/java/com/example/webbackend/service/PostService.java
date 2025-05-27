@@ -27,6 +27,20 @@ public class PostService {
         return postRepository.findAllByUser(user);
     }
 
+
+    public List<Post> getAllUserLikedPosts(Integer userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı");
+        }
+        User user = userOpt.get();
+        // Kullanıcının beğenileri üzerinden postları topla
+        return user.getLikes()
+                .stream()
+                .map(like -> like.getPost())
+                .toList();
+    }
+
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
