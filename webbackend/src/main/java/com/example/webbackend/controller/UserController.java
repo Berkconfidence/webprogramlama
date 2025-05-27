@@ -25,6 +25,16 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> searchUsers(@RequestParam("query") String query) {
+        try {
+            return ResponseEntity.ok(userService.searchUsers(query));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Arama sırasında hata oluştu: " + e.getMessage());
+        }
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
         try {

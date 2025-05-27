@@ -21,7 +21,9 @@ function Post() {
                 const response = await fetch(`/post/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
-                    setPosts(data);
+                    // Tarihe göre azalan sırala (en güncel en başta)
+                    const sorted = [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    setPosts(sorted);
                 } else {
                     console.error("Postlar alınamadı.");
                 }

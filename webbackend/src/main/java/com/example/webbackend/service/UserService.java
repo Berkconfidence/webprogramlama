@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,13 @@ public class UserService {
 
     public User getUserById(Integer userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    public List<User> searchUsers(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return List.of();
+        }
+        return userRepository.findByUsernameContainingIgnoreCase(query);
     }
 
     public User loginUser(String username, String password) {

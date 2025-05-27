@@ -12,7 +12,7 @@ function Profile() {
     const [inputKey, setInputKey] = React.useState(Date.now());
     const inputRef = React.useRef();
 
-    const [activeTab, setActiveTab] = React.useState('anasayfa');
+    const [activeTab, setActiveTab] = React.useState('gonderiler');
     const handleTabChange = (tab) => {
         setActiveTab(tab);
     };
