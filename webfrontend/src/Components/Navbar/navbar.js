@@ -6,6 +6,13 @@ import DefaultProfile from '../../assets/profile.png';
 function Navbar() {
 
     const userId = localStorage.getItem("userId");
+    // Eğer userId yoksa login sayfasına yönlendir
+    React.useEffect(() => {
+        if (!userId) {
+            window.location.href = "/login";
+        }
+    }, [userId]);
+
     const [userData, setUserData] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
 
