@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 5  
+    networks:
+      - spring_mysql
+  backend:
+    build:
+      context: ./webbackend
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - spring_mysql
+
+  frontend:
+    build:
+      context: ./webfrontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - spring_mysql
+
+volumes:
+  db_data:
+
+networks:
+  spring_mysql:
+    driver: bridge

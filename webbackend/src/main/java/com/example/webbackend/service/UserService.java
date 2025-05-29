@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,13 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
+    public List<User> searchUsers(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return List.of();
+        }
+        return userRepository.findByUsernameContainingIgnoreCase(query);
+    }
+
     public User loginUser(String username, String password) {
         User user = userRepository.findByUsername(username);
 
@@ -26,6 +34,10 @@ public class UserService {
         }
 
         return user;
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public User createUser(String username, String email, String password) {
@@ -60,6 +72,32 @@ public class UserService {
             throw new RuntimeException("Fotoğraf kaydedilemedi", e);
         }
 
+        return userRepository.save(user);
+    }
+
+    public User updateEmail(Integer userId, String newEmail) {
+        if (userId == null || newEmail == null || newEmail.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı ID veya yeni e-posta eksik.");
+        }
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı.");
+        }
+        User user = userOpt.get();
+        user.setEmail(newEmail);
+        return userRepository.save(user);
+    }
+
+    public User updatePassword(Integer userId, String newPassword) {
+        if (userId == null || newPassword == null || newPassword.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı ID veya yeni şifre eksik.");
+        }
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("Kullanıcı bulunamadı.");
+        }
+        User user = userOpt.get();
+        user.setPasswordHash(newPassword);
         return userRepository.save(user);
     }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import './profile.css';
 import Post from "./post";
+import Like from "./like";
+import DefaultProfile from '../../assets/profile.png';
 
 function Profile() {
     const userId = localStorage.getItem("userId");
@@ -11,7 +13,7 @@ function Profile() {
     const [inputKey, setInputKey] = React.useState(Date.now());
     const inputRef = React.useRef();
 
-    const [activeTab, setActiveTab] = React.useState('anasayfa');
+    const [activeTab, setActiveTab] = React.useState('gonderiler');
     const handleTabChange = (tab) => {
         setActiveTab(tab);
     };
@@ -98,7 +100,7 @@ function Profile() {
                                 ? userData.profilePhoto.startsWith("http")
                                     ? userData.profilePhoto
                                     : `data:image/jpeg;base64,${userData.profilePhoto}`
-                                : "/default-profile.png"
+                                : DefaultProfile
                         }
                         alt="Profil Resmi" style={{ width: "110px", height: "110px", borderRadius: "50%", marginTop: "18px" }}
                     />
@@ -107,13 +109,13 @@ function Profile() {
                         <p className="profile-bio">{userData.bio}</p>
                         <div className="profile-posts">
                             <div className="profile-info-count">
-                                <strong>15</strong> Gönderi
+                                <strong>{userData.posts.length}</strong> Gönderi
                             </div>
                             <div className="profile-info-count">
-                                <strong>76</strong> Yorum
+                                <strong>{userData.comments.length}</strong> Yorum
                             </div>
                             <div className="profile-info-count">
-                                <strong>185</strong> Beğeni
+                                <strong>{userData.likes.length}</strong> Beğeni
                             </div>
                         </div>
                     </div>
@@ -188,7 +190,8 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            <Post />
+            {activeTab === 'gonderiler' && <Post />}
+            {activeTab === 'begenilenler' && <Like />}
         </div>
         
         

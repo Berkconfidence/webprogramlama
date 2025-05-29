@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import './explore.css';
+import React, { useState , useEffect} from "react";
+import '../Profile/post.css';
+import '../Explore/explore.css';
 import { StarRating } from "../Share/starrating.tsx";
 
-function Explore() {
+
+function SearchProfilePost({user}) {
     const [posts, setPosts] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [selectedPost, setSelectedPost] = React.useState(null);
@@ -10,13 +12,14 @@ function Explore() {
     const [comments, setComments] = useState([]);
     const [commentsLoading, setCommentsLoading] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
-    const [likeLoading, setLikeLoading] = useState(false); // yeni state
-    const userId = localStorage.getItem("userId");
+    const [likeLoading, setLikeLoading] = useState(false);
+    const userId = user.userId;
+
 
     React.useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch(`/post/all`);
+                const response = await fetch(`/post/${userId}`);
                 if (response.ok) {
                     const data = await response.json();
                     // Tarihe göre azalan sırala (en güncel en başta)
@@ -34,7 +37,7 @@ function Explore() {
         fetchPosts();
     }, [userId]);
 
-    // Modal açıldığında yorumları getir ve beğeni durumunu kontrol et
+     // Modal açıldığında yorumları getir ve beğeni durumunu kontrol et
     useEffect(() => {
         if (selectedPost) {
             setCommentsLoading(true);
@@ -149,16 +152,15 @@ function Explore() {
 
     return (
         <div>
-            <h1 className="explore-title">Keşfet</h1>
-            <div className="explore-container">
+            <div className="post-container">
                 {posts.map((post) => (
                     <div
                         key={post.postId}
-                        className="explore-card"
+                        className="post-card"
                         onClick={() => setSelectedPost(post)}
                         style={{ cursor: "pointer" }}
                     >
-                        <div className="explore-image-wrapper">
+                        <div className="post-image-wrapper">
                             <img
                                 src={
                                     post.image
@@ -168,15 +170,15 @@ function Explore() {
                                         : "/default.png"
                                 }
                                 alt="Post Resmi"
-                                className="explore-image"
+                                className="post-image"
                             />
                         </div>
-                        <div className="explore-content">
-                            <div className="explore-rating">
+                        <div className="post-content">
+                            <div className="post-rating">
                                 <StarRating rating={post.rating} max={5} />
                             </div>
-                            <p className="explore-review">{post.review}</p>
-                            <div className="explore-meta">
+                            <p className="post-review">{post.review}</p>
+                            <div className="post-meta">
                                 <span className="explore-meta-item">❤️ {post.likes ? post.likes.length : 0} Beğeni</span>
                                 <span className="explore-meta-item">💬 {post.comments ? post.comments.length : 0} Yorum</span>
                             </div>
@@ -263,4 +265,4 @@ function Explore() {
         </div>
     );
 }
-export default Explore;
+export default SearchProfilePost;
